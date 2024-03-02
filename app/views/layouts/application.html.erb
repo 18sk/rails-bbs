@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RailsBbs</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="navbar is-danger mb-6">
+        <div class="navbar-brand">
+          <div class="navbar-item pl-6">
+            <h1 class="has-text-weight-bold">Rails BBS</h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-half">
+      <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<%= form_with model: @board do |form| %>
+  <div class="field">
+    <label class="label">タイトル</label>
+    <div class="control">
+      <%= form.text_field :title, class: 'input' %>
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">板の説明</label>
+    <div class="control">
+      <%= form.text_area :description, class: 'textarea' %>
+    </div>
+  </div>
+  <div class="field is-grouped">
+    <div class="control">
+      <%= form.submit "作成", class: "button is-link" %>
+    </div>
+    <div class="control">
+      <button class="button is-link is-light">キャンセル</button>
+    </div>
+  </div>
+<% end %>
