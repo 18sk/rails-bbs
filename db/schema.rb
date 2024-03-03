@@ -10,14 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_01_151932) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_03_032532) do
   create_table "boards", force: :cascade do |t|
     t.string "title"
-    t.text "description"
     t.boolean "is_deleted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "user_id"
+    t.integer "comment_id"
+    t.index ["comment_id"], name: "index_boards_on_comment_id"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string "user_id"
+    t.integer "row_number"
+    t.text "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "board_id"
+    t.index ["board_id"], name: "index_comments_on_board_id"
+  end
+
+  add_foreign_key "boards", "comments"
+  add_foreign_key "comments", "boards"
 end

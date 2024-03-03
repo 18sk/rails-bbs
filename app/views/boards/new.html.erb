@@ -1,3 +1,11 @@
+<% if @board.errors.count != 0 %>
+  <div class="notification is-danger">
+    <% @board.errors.full_messages.each do |message| %>
+      <p>・<%= message %></p>
+    <% end %>
+  </div>
+<% end %>
+
 <%= form_with model: @board do |form| %>
   <div class="field">
     <label class="label">タイトル</label>
@@ -5,12 +13,16 @@
       <%= form.text_field :title, class: 'input' %>
     </div>
   </div>
-  <div class="field">
-    <label class="label">板の説明</label>
-    <div class="control">
-      <%= form.text_area :description, class: 'textarea' %>
+
+  <%= form.fields_for :comments do |comment_form| %>
+    <div class="field">
+      <label class="label">1コメ</label>
+      <div class="control">
+        <%= comment_form.text_area :text, class: 'textarea' %>
+      </div>
     </div>
-  </div>
+  <% end %>
+
   <div class="field is-grouped">
     <div class="control">
       <%= form.submit "作成", class: "button is-link" %>
