@@ -3,12 +3,16 @@
   <%= @board.title %>
 </div>
 
-<div class="card p-4">
-  <p>
-    <%= @board.comments[0].display_created_time %>: 
-    <%= @board.comments[0].user_id %>
-  </p>
-  <div class="card-content">
-    <%= @board.comments[0].text %>
+<% @board.comments.each do |comment| %>
+  <div class="card p-4 mb-4">
+    <p>
+      <%= comment.display_created_time %>: 
+      <%= comment.user_id %>
+    </p>
+    <div class="card-content">
+      <%= comment.text %>
+    </div>
   </div>
-</div>
+<% end %>
+
+<%= render 'comments/form' %>

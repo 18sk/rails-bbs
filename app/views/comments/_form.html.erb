@@ -1,0 +1,17 @@
+<div class="mt-6">
+  <%= form_with model: @comment do |form| %>
+    <div class="field">
+      <label class="label">コメント</label>
+      <div class="control">
+        <%= form.text_area :text, class: 'textarea' %>
+      </div>
+    </div>
+    <div class="field is-grouped">
+      <div class="control">
+        <%= form.hidden_field :title, value: @board.title %>
+        <%= form.hidden_field :board_id, value: @board.id %>
+        <%= form.submit "投稿", class: "button is-link" %>
+      </div>
+    </div>
+  <% end %>
+</div>
