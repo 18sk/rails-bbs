@@ -1,5 +1,13 @@
 <div class="is-size-3 has-text-weight-bold">
   <%= @board.title %>
 </div>
-<%= @board.user_id %>
-<%= @board.description %>
+
+<div class="card p-4">
+  <p>
+    <%= @board.comments[0].display_created_time %>: 
+    <%= @board.comments[0].user_id %>
+  </p>
+  <div class="card-content">
+    <%= @board.comments[0].text %>
+  </div>
+</div>
