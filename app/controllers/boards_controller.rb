@@ -29,6 +29,10 @@ class BoardsController < ApplicationController
 
   private
 
+  def board_params
+    params.require(:board).permit(:title, comments_attributes: [:text, :user_id])
+  end
+
   def user_id(client_ip)
     today = Date.today.to_s
     Digest::SHA256.hexdigest(board_params[:title] + client_ip + today)[0, 8]

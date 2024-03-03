@@ -1,12 +1,14 @@
-<% @boards&.each do |board| %>
-  <%= link_to(board_path(board)) do %>
-    <div class="box mb-5">
-      <div class="title is-4">
-        <%= board.title %>
+<div>
+  <% @boards&.each do |board| %>
+    <%= link_to(board_path(board)) do %>
+      <div class="box mb-5">
+        <div class="title is-4">
+          <%= board.title %>
+        </div>
+        <p>
+          <%= board.display_created_time %>
+        </p>
       </div>
-      <p>
-        <%= board.display_created_time %>
-      </p>
-    </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>

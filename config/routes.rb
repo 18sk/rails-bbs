@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'boards#index'
   resources 'boards'
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
