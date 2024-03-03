@@ -1,22 +1,26 @@
 class BoardsController < ApplicationController
+  include Userid
+
   def index
     @boards = Board.all.order(created_at: :desc)
   end
 
   def new
     @board = Board.new
+    @board.comments.build
   end
 
   def show
     @board = Board.find(params[:id])
+    @comment = Comment.new(board_id: @board.id)
   end
 
   def create
-    client_ip =  request.remote_ip
-    today =  Date.today.to_s    
-    user_id = Digest::SHA256.hexdigest(board_params[:title] + client_ip + today)[0, 8]
-    
-    @board = Board.new({user_id: user_id}.merge(board_params))
+    user_id = generate_user_id(board_params[:title], request.remote_ip)
+
+    @board = Board.new(board_params)
+    @board.comments[0].user_id = user_id
+
     if @board.save
       redirect_to @board
     else
@@ -25,7 +29,8 @@ class BoardsController < ApplicationController
   end
 
   private
-    def board_params
-      params.require(:board).permit(:title, :description, :user_id)
-    end
+
+  def board_params
+    params.require(:board).permit(:title, comments_attributes: [:text, :user_id])
+  end
 end

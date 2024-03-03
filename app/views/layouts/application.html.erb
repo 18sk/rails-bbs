@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="has-background-link-light">
   <head>
     <title>RailsBbs</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,19 +8,35 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.0/css/all.css">
+    <style type="text/css">
+      .full-height {
+        height: 100vh;
+      }
+    </style>
   </head>
 
   <body>
-    <div class="container">
-      <div class="navbar is-danger mb-6">
+    <div class="container has-navbar-fixed-top pt-6">
+      <div class="navbar is-fixed-top is-link">
         <div class="navbar-brand">
           <div class="navbar-item pl-6">
             <h1 class="has-text-weight-bold">Rails BBS</h1>
           </div>
         </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <%= link_to new_board_path, class: 'button is-outlined' do%>
+              <span class="icon">
+                <i class="fas fa-pen"></i>
+              </span>
+              <span>掲示板を作成する</span>
+            <% end %>
+          </div>
+        </div>
       </div>
 
-      <div class="columns is-centered">
+      <div class="columns is-centered pt-4">
         <div class="column is-half">
       <%= yield %>
         </div>
