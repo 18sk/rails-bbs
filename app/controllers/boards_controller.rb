@@ -2,7 +2,7 @@ class BoardsController < ApplicationController
   include Userid
 
   def index
-    @boards = Board.all.order(created_at: :desc)
+    @boards = Board.page(params[:page]).order(created_at: :desc).per(5)
   end
 
   def new
@@ -26,6 +26,11 @@ class BoardsController < ApplicationController
     else
       render 'new', status: :unprocessable_entity
     end
+  end
+
+  def search
+    @boards = Board.where('title LIKE ?', "%#{params[:query]}%").page(params[:page]).order(created_at: :desc).per(5)
+    render 'index'
   end
 
   private
